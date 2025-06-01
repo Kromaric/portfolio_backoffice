@@ -12,17 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('projects', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('slug')->unique();
-            $table->enum('status', ['draft', 'published', 'archived'])->default('draft'); // draft, published, archived
-            $table->enum('category', ['web', 'mobile', 'desktop', 'data', 'ia','other'])->default('web');
-            $table->text('technologies')->nullable(); // JSON or comma-separated list of technologies used
-            $table->text('description')->nullable();
-            $table->string('image')->nullable();
-            $table->string('link')->nullable();
-            $table->timestamps();
-        });
+        $table->id();
+        $table->string('title');
+        $table->string('slug')->unique();
+        $table->enum('status', ['draft', 'published', 'archived'])->default('draft');
+        $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('set null');
+        $table->text('description')->nullable();
+        $table->string('image')->nullable();
+        $table->string('link')->nullable();
+        $table->timestamps();
+    });
     }
 
     /**
