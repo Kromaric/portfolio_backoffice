@@ -23,7 +23,15 @@ class TechnologyResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('slug')
+                     ->required()
+                    ->maxLength(25),
+                Forms\Components\TextInput::make('icon')
+                    ->label('Icon URL')
+                    ->maxLength(255),
             ]);
     }
 
@@ -31,7 +39,10 @@ class TechnologyResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')->searchable(),
+                Tables\Columns\TextColumn::make('slug'),
+                Tables\Columns\TextColumn::make('icon')->label('Icon URL'),
+                Tables\Columns\TextColumn::make('created_at')->dateTime('d/m/Y')->label('Created'),
             ])
             ->filters([
                 //
@@ -43,14 +54,14 @@ class TechnologyResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -58,5 +69,5 @@ class TechnologyResource extends Resource
             'create' => Pages\CreateTechnology::route('/create'),
             'edit' => Pages\EditTechnology::route('/{record}/edit'),
         ];
-    }    
+    }
 }

@@ -23,7 +23,21 @@ class TestimonialResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('job')
+                    ->label('Job Title')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('avatar')
+                    ->label('Avatar URL')
+                    ->maxLength(255),
+                Forms\Components\Textarea::make('content')
+                    ->required()
+                    ->rows(5),
+                Forms\Components\DatePicker::make('date')
+                    ->label('Testimonial Date')
+                    ->nullable(),
             ]);
     }
 
@@ -31,7 +45,12 @@ class TestimonialResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')->searchable(),
+                Tables\Columns\TextColumn::make('job')->label('Job Title'),
+                Tables\Columns\TextColumn::make('avatar')->label('Avatar URL'),
+                Tables\Columns\TextColumn::make('content')->limit(50),
+                Tables\Columns\TextColumn::make('date')->label('Date'),
+                Tables\Columns\TextColumn::make('created_at')->dateTime('d/m/Y')->label('Created'),
             ])
             ->filters([
                 //

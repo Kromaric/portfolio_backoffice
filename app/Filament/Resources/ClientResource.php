@@ -23,7 +23,15 @@ class ClientResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('logo')
+                    ->label('Logo URL')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('link')
+                    ->label('Client Link')
+                    ->maxLength(255),
             ]);
     }
 
@@ -31,7 +39,10 @@ class ClientResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')->searchable(),
+                Tables\Columns\TextColumn::make('logo')->label('Logo URL'),
+                Tables\Columns\TextColumn::make('link')->label('Client Link'),
+                Tables\Columns\TextColumn::make('created_at')->dateTime('d/m/Y')->label('Created'),
             ])
             ->filters([
                 //

@@ -23,7 +23,18 @@ class CategoryResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('slug')
+                     ->required()
+                    ->maxLength(25),
+                Forms\Components\Select::make('type')
+                    ->options([
+                        'project' => 'Project',
+                        'blog' => 'Blog',
+                    ])
+                    ->required(),
             ]);
     }
 
@@ -31,7 +42,10 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')->searchable(),
+                Tables\Columns\TextColumn::make('slug'),
+                Tables\Columns\TextColumn::make('type'),
+                Tables\Columns\TextColumn::make('created_at')->dateTime('d/m/Y')->label('Created'),
             ])
             ->filters([
                 //
@@ -43,14 +57,14 @@ class CategoryResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -58,5 +72,5 @@ class CategoryResource extends Resource
             'create' => Pages\CreateCategory::route('/create'),
             'edit' => Pages\EditCategory::route('/{record}/edit'),
         ];
-    }    
+    }
 }
