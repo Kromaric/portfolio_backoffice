@@ -1,0 +1,13 @@
+/* filepath: resources/css/filament/admin/theme.css */
+:root {
+    --primary-50: #ede9fe;
+    --primary-100: #ddd6fe;
+    --primary-200: #c4b5fd;
+    --primary-300: #a78bfa;
+    --primary-400: #8b5cf6;
+    --primary-500: #5e17eb;   /* ta couleur principale */
+    --primary-600: #4c1d95;
+    --primary-700: #3a0ca3;   /* variante foncée */
+    --primary-800: #312e81;
+    --primary-900: #1e1b4b;
+}
